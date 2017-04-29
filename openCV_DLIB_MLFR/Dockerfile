@@ -1,3 +1,4 @@
+# Based on https://github.com/feroult/imsearch/blob/master/Dockerfile
 # To run a container based on the image, allowing GUI access (unsecured way):
 # xhost +
 # docker run --rm -ti -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY opencv3
