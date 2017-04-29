@@ -35,14 +35,14 @@ RUN pip3 install numpy
 
 # Checkout OpenCV contrib
 WORKDIR /usr/local/src
-RUN git clone --depth=1 https://github.com/opencv/opencv_contrib.git
+RUN git clone https://github.com/opencv/opencv_contrib.git
 WORKDIR opencv_contrib
 RUN git checkout 3.2.0
 RUN rm -rf .git
 
 # Compile OpenCV master branch from sources
 WORKDIR /usr/local/src
-RUN git clone --depth=1 https://github.com/opencv/opencv.git
+RUN git clone https://github.com/opencv/opencv.git
 WORKDIR opencv
 RUN git checkout 3.2.0
 RUN rm -rf .git
@@ -62,16 +62,14 @@ RUN ldconfig
 ##########
 ## DLIB ##
 ##########
-RUN apt-get -y install libboost-all-dev
-WORKDIR /usr/local/src
-RUN git clone https://github.com/davisking/dlib.git
-WORKDIR dlib
-RUN mkdir build
-WORKDIR build
-RUN cmake .. -DDLIB_USE_CUDA=0 -DUSE_AVX_INSTRUCTIONS=1
-RUN cmake --build .
-WORKDIR /usr/local/src/dlib
-RUN python3 setup.py install --yes USE_AVX_INSTRUCTIONS --no DLIB_USE_CUDA
+RUN apt-get -y install libgtk-3-dev libboost-all-dev
+RUN pip3 install scipy
+RUN pip3 install scikit-image
+RUN apt-get -y install software-properties-common
+RUN add-apt-repository ppa:george-edison55/cmake-3.x
+RUN apt-get update
+RUN apt-get -y install cmake
+RUN pip3 install dlib
 
 ######################
 ## Face recognition ##
